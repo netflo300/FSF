@@ -6,7 +6,7 @@ require_once ("class/fckeditor/fckeditor.php");
 
 $db = new Db();
 
-$db->query("SELECT summary, text FROM fsf_step WHERE id_step = '".$_POST['id_step']."' AND id_instance = '".$_SESSION['instance']."' ;");
+$db->query("SELECT summary, text, variation_metrics FROM fsf_step WHERE id_step = '".$_POST['id_step']."' AND id_instance = '".$_SESSION['instance']."' ;");
 $o = $db->fetchNextObject();
 ?>
 
@@ -14,7 +14,7 @@ $o = $db->fetchNextObject();
 <form method="POST">
 <input type="text" name="summary" value="<?php echo stripslashes($o->summary) ; ?>" />
 <?php
-$fck = new FCKeditor('newStep');
+$fck = new FCKeditor('text');
 //$editeur->BasePath = '../script/fckeditor/' ;
 $fck->Config['SkinPath'] = 'skins/office2003/' ;
 $fck->ToolbarSet = 'Default' ;
@@ -23,8 +23,28 @@ $fck->Width = 800 ;
 $fck->Height = 400 ;
 $fck->Config['EnterMode'] = 'br';
 $fck->Create();
+
+$variation = explode(';', $o->variation_metrics);
+$db->query("SELECT id_metric, name_metric FROM fsf_metric WHERE id_instance = '".$_SESSION['instance']."' ;");
+if ($db->get_num_rows() > 0) {
+	$count = 0;
+	foreach ($db->fetch_array() as $k => $v) {
+		echo'Variation '.$v['name_metric'].' : <input type="text" name="metrics'.$v['id_metric'].'" value="'.(isset($variation[$count])&&!empty($variation[$count])?$variation[$count]:'0').'"/>';
+		echo'<br />';
+		$count++;
+	}
+}
+
+
 ?>
 <input type="hidden" name="id_step" value="<?php echo $_POST['id_step'] ; ?>" />
+
+
+
+
+
+
+
 <input type="submit" name="editer" />
 </form>
 	
