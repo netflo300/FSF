@@ -39,3 +39,12 @@ position: absolute;
 #debug {
 	display :none;
 }
+
+table.tableau {
+	border-collapse: collapse;
+}
+
+table.tableau td, th {
+	border:1px solid black;
+	
+}

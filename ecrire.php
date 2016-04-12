@@ -49,8 +49,9 @@ if (!isset($_SESSION['instance'])) {
 			<legend><a href="#" class="fieldset" onclick="replier_fieldset(this);">-</a> Step <?php echo $v['id_step']. ' : ' . stripslashes($v['summary']) ;?></legend>
 			<div><?php echo $v['text'] ;?>
 			<br />
-			<a href="#" data-width="800" data-height="800" data-rel="popup_name" class="poplight" onclick="ajax_editer(1);">Modifer</a>
-			
+			<a href="#" data-width="800" data-height="800" data-rel="popup_name" class="poplight" onclick="ajax_editer(<?php echo $v['id_step'] ;?>);">Modifer</a> - 
+			<a href="#" data-width="800" data-height="800" data-rel="popup_name" class="poplight" onclick="ajax_link(<?php echo $v['id_step'] ;?>);">Liens</a>
+		
 			
 			</div>
 			</fieldset>
