@@ -9,7 +9,7 @@ $db = new Db();
 $db->query("SELECT summary, text, variation_metrics FROM fsf_step WHERE id_step = '".$_POST['id_step']."' AND id_instance = '".$_SESSION['instance']."' ;");
 $o = $db->fetchNextObject();
 ?>
-
+<a href="#" class="close"><img src="images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
 <h1>Ajouter une etape</h1>
 <form method="POST">
 <input type="text" name="summary" value="<?php echo stripslashes($o->summary) ; ?>" />
