@@ -19,6 +19,11 @@ if (isset($_POST)) {
 	
 }
 
+if(isset($_GET['action']) && $_GET['action']=='create') {
+	$db->query("INSERT INTO fsf_step (id_instance) VALUES ('".$_SESSION['instance']."');");
+	Header("Location:index.php");
+	die;
+}
 
 entete("Ecrire");
 
@@ -46,37 +51,21 @@ if (!isset($_SESSION['instance'])) {
 		foreach ($db->fetch_array() as $k => $v) {
 			?>
 			<fieldset>
-			<legend><a href="#" class="fieldset" onclick="replier_fieldset(this);">-</a> Step <?php echo $v['id_step']. ' : ' . stripslashes($v['summary']) ;?></legend>
+			<legend><a href="#" class="fieldset" onclick="replier_fieldset(this);">-</a> &Eacute;tape <?php echo $v['id_step']. ' : ' . stripslashes($v['summary']) ;?></legend>
 			<div><?php echo $v['text'] ;?>
 			<br />
 			<a href="#" data-width="800" data-height="800" data-rel="popup_name" class="poplight" onclick="ajax_editer(<?php echo $v['id_step'] ;?>);">Modifer</a> - 
 			<a href="#" data-width="800" data-height="800" data-rel="popup_name" class="poplight" onclick="ajax_link(<?php echo $v['id_step'] ;?>);">Liens</a>
-		
-			
 			</div>
 			</fieldset>
-			
 			<?php 
 		}
-	
 	}
-	
-	
-	
 	?>
-	
-<a href="#" data-width="800" data-rel="popup_name" class="poplight">En savoir plus</a>
-	
-	
+<a href="?action=create">Cr&eacute;er un nouvelle &eacute;tape</a>
 <div id="popup_name" class="popup_block">
-
 </div>
-	
-	
 	<?php 
 }
-
-
-
 footer();
 ?>
