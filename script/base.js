@@ -1,8 +1,10 @@
 function replier_fieldset(f) {
 	if (f.parentElement.nextElementSibling.style.display == "none") {
 		f.parentElement.nextElementSibling.style.display="";
+		f.innerHTML = "-";
 	} else {
 		f.parentElement.nextElementSibling.style.display="none";
+		f.innerHTML = "+";
 	}
 }
 
