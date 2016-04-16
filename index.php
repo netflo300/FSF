@@ -18,7 +18,7 @@ if (!isset($_SESSION['mode'])) {
 	entete("Ecrire");
 	?>
 	<a href="?mode=redactionnel">Mode redactionnel</a><br />
-	<a href="?mode=utilisteur">Mode utilisteur</a>
+	<a href="?mode=utilisteur">Mode utilisateur</a>
 	<?php 
 	die;
 }

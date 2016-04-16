@@ -19,8 +19,9 @@ function entete($titre) {
 	$res.='<meta name="Expires" content="never" />'."\n";
 	$res.='<script type="text/javascript" src="script/ajax.js" ></script>'."\n";
 	$res.='<script type="text/javascript" src="script/jquery.min.js" ></script>'."\n";
+	$res.='<script type="text/javascript" src="script/jquery-ui.min.js" ></script>'."\n";
 	$res.='<script type="text/javascript" src="script/base.js" ></script>'."\n";
-	//$res.='<script type="text/javascript" src="scripts/prototype.js" ></script>'."\n";
+	$res.='<script type="text/javascript" src="script/jquery.stepProgressBar.js" ></script>'."\n";
 	//$res.='<script type="text/javascript" src="scripts/builder.js" ></script>'."\n";
 	//$res.='<script type="text/javascript" src="scripts/effects.js" ></script>'."\n";
 	//$res.='<script type="text/javascript" src="scripts/controls.js" ></script>'."\n";
@@ -33,9 +34,9 @@ function entete($titre) {
 	//$res.='<script type="text/javascript" src="scripts/info_bulle.js" ></script>'."\n";
 	//$res.='<script type="text/javascript" src="scripts/tablefilter_all_min.js" ></script>'."\n";
 	$res.=''."\n";
-	
 	$res.='<link href="css/base.css" rel="stylesheet" type="text/css" />'."\n";
-	//$res.='<link href="styles/custom.css" rel="stylesheet" type="text/css" />'."\n";
+	$res.='<link href="css/mobile.css" rel="stylesheet" type="text/css" />'."\n";
+	$res.='<link href="css/jquery.stepProgressBar.css" rel="stylesheet" type="text/css" />'."\n";
 	//$res.='<link href="styles/filtergrid.css" rel="stylesheet" type="text/css" />'."\n";
 	$res.='</head>'."\n";
 	$res.='<body style="">'."\n";
