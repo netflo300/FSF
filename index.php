@@ -1,5 +1,7 @@
 <?php
 session_start();
+header('Content-Type: text/html; charset=utf-8');
+
 require_once ("class/db.class.php");
 require_once ("lib/fonctions.php");
 require_once ("class/fckeditor/fckeditor.php");

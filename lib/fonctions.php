@@ -13,7 +13,7 @@ function entete($titre) {
 	$res.='<head>'."\n";
 	$res.='<title>'.$titre.'</title>'."\n";
 	$res.='<meta name="Robots" content="Index,Follow" />'."\n";
-	$res.='<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />'."\n";
+	$res.='<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n";
 	$res.='<meta http-equiv="Content-Language" content="fr" />'."\n";
 	$res.='<meta name="Author" content="Florian Royal" />'."\n";
 	$res.='<meta name="Expires" content="never" />'."\n";
@@ -129,6 +129,11 @@ function travaux() {
 		header("Location:travaux.php");
 		die;
 	}
+}
+
+function ($chaine, $encodeUTF8=false) {
+	if (!$encodeUTF8) return htmlentities($chaine);
+	else return htmlentities($chaine, ENT_QUOTES, "UTF-8");
 }
 
 ?>
