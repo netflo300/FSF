@@ -25,7 +25,7 @@ $fck->Config['EnterMode'] = 'br';
 $fck->Create();
 
 $variation = explode(';', $o->variation_metrics);
-$db->query("SELECT id_metric, name_metric FROM fsf_metric WHERE id_instance = '".$_SESSION['instance']."' ;");
+$db->query("SELECT id_metric, name_metric FROM fsf_metric WHERE id_instance = '".$_SESSION['instance']."' ORDER BY id_metric;");
 if ($db->get_num_rows() > 0) {
 	$count = 0;
 	foreach ($db->fetch_array() as $k => $v) {

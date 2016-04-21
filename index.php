@@ -18,7 +18,7 @@ if (!isset($_SESSION['mode'])) {
 	entete("Ecrire");
 	?>
 	<a href="?mode=redactionnel">Mode redactionnel</a><br />
-	<a href="?mode=utilisteur">Mode utilisateur</a>
+	<a href="?mode=utilisateur">Mode utilisateur</a>
 	<?php 
 	die;
 }
@@ -28,7 +28,7 @@ if($_SESSION['mode'] == 'redactionnel') {
 	die;
 }
 
-if($_SESSION['mode'] == 'utilisteur') {
+if($_SESSION['mode'] == 'utilisateur') {
 	include("user.php");
 	die;
 }

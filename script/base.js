@@ -26,3 +26,7 @@ function ajouter_link(source) {
 	var text = $('#text_link').val();
 	ajax('aj_link.php', 'action=add&id_step='+source+'&target='+target+'&rule='+rule+'&text='+text, 'popup_name');
 }
+
+function display_step(id, origin) {
+	ajax('aj_game.php', 'id_step_next='+id+'&id_step_origin='+origin, 'game');
+}
