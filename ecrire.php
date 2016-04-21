@@ -14,7 +14,7 @@ if (isset($_POST)) {
 		}
 		$var = substr($var, 1);
 		
-		$db->query("UPDATE fsf_step SET summary='".addslashes(htmlentities($_POST['summary']))."', text='".addslashes($_POST['text'])."', variation_metrics = '".$var."'  WHERE id_instance='".$_SESSION['instance']."' AND id_step='".$_POST['id_step']."' ; ");
+		$db->query("UPDATE fsf_step SET summary='".addslashes(htmlentities($_POST['summary']))."', text='".addslashes($_POST['text'])."', variation_metrics = '".$var."', check_random_code = '".(isset($_POST['check_random_code'])?'1':'0')."'  WHERE id_instance='".$_SESSION['instance']."' AND id_step='".$_POST['id_step']."' ; ");
 	}
 	
 }
@@ -51,7 +51,7 @@ if (!isset($_SESSION['instance'])) {
 		foreach ($db->fetch_array() as $k => $v) {
 			?>
 			<fieldset>
-			<legend><a href="#" class="fieldset" onclick="replier_fieldset(this);">+</a> &Eacute;tape <?php echo $v['id_step']. ' : ' . stripslashes($v['summary']) ;?></legend>
+			<legend><a href="#" class="fieldset" onclick="replier_fieldset(this);">+</a> &Eacute;tape ID : <?php echo $v['id_step']. ' : ' . stripslashes($v['summary']) ;?></legend>
 			<div style="display:none;"><?php echo $v['text'] ;?>
 			<br />
 			<a href="#" data-width="800" data-height="800" data-rel="popup_name" class="poplight" onclick="ajax_editer(<?php echo $v['id_step'] ;?>);">Modifier</a> - 

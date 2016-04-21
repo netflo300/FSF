@@ -6,13 +6,13 @@ require_once ("class/fckeditor/fckeditor.php");
 
 $db = new Db();
 
-$db->query("SELECT summary, text, variation_metrics FROM fsf_step WHERE id_step = '".$_POST['id_step']."' AND id_instance = '".$_SESSION['instance']."' ;");
+$db->query("SELECT summary, text, variation_metrics, check_random_code FROM fsf_step WHERE id_step = '".$_POST['id_step']."' AND id_instance = '".$_SESSION['instance']."' ;");
 $o = $db->fetchNextObject();
 ?>
 <a href="#" class="close"><img src="images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
 <h1>Ajouter une etape</h1>
 <form method="POST">
-<input type="text" name="summary" value="<?php echo stripslashes($o->summary) ; ?>" />
+<label>Titre : </label><input type="text" name="summary" value="<?php echo stripslashes($o->summary) ; ?>" />
 <?php
 $fck = new FCKeditor('text');
 //$editeur->BasePath = '../script/fckeditor/' ;
@@ -37,14 +37,9 @@ if ($db->get_num_rows() > 0) {
 
 
 ?>
+<label>Necessite un code pour avancer</label><input type="checkbox" name="check_random_code" <?php echo (((isset($o->check_random_code) && $o->check_random_code) == '1')?'chacked="checked"':'') ; ?> />
 <input type="hidden" name="id_step" value="<?php echo $_POST['id_step'] ; ?>" />
-
-
-
-
-
-
-
+<br />
 <input type="submit" name="editer" />
 </form>
 	
