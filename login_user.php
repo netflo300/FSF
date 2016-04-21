@@ -5,7 +5,7 @@ if (isset($_POST['login']) && !empty($_POST['login'])) {
 	$db = new Db();
 	$db->query("SELECT root_step FROM fsf_instance WHERE id_instance = '".$_SESSION['instance']."' ;");
 	$instance = $db->fetchNextObject();
-	$db->query("REPLACE INTO FSF_USER (login_user, id_instance, way_user) VALUES ('".$_POST['login']."', '".$_SESSION['instance']."', '".$instance->way_user."'); ");
+	$db->query("REPLACE INTO fsf_user (login_user, id_instance, way_user) VALUES ('".$_POST['login']."', '".$_SESSION['instance']."', '".$instance->way_user."'); ");
 	$_SESSION['login_user'] = $_POST['login'];
 	Header("Location:index.php");
 	die;

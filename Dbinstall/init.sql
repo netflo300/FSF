@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Jeu 14 Avril 2016 à 00:16
+-- Généré le : Jeu 21 Avril 2016 à 21:46
 -- Version du serveur: 5.5.8
 -- Version de PHP: 5.3.5
 
@@ -28,15 +28,9 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE IF NOT EXISTS `fsf_instance` (
   `id_instance` int(11) NOT NULL AUTO_INCREMENT,
   `name_instance` varchar(255) NOT NULL,
+  `root_step` int(11) NOT NULL,
   PRIMARY KEY (`id_instance`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Contenu de la table `fsf_instance`
---
-
-INSERT INTO `fsf_instance` (`id_instance`, `name_instance`) VALUES
-(1, 'test');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -53,17 +47,10 @@ CREATE TABLE IF NOT EXISTS `fsf_metric` (
   `min_value` int(11) NOT NULL,
   `low_value` int(11) NOT NULL,
   `high_value` int(11) NOT NULL,
+  `unit_metric` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id_metric`),
   KEY `id_instance` (`id_instance`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Contenu de la table `fsf_metric`
---
-
-INSERT INTO `fsf_metric` (`id_metric`, `id_instance`, `name_metric`, `default_value`, `max_value`, `min_value`, `low_value`, `high_value`) VALUES
-(1, 1, 'sant&eacute;', 90, 100, 0, 20, 80),
-(2, 1, 'argent', 50, 1000000, 0, 20, 1000);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -78,13 +65,6 @@ CREATE TABLE IF NOT EXISTS `fsf_rule` (
   PRIMARY KEY (`rule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `fsf_rule`
---
-
-INSERT INTO `fsf_rule` (`rule_id`, `id_instance`, `rule_content`) VALUES
-('GOOD_HEALTH', 1, 'SELECT \r\nCASE value\r\n  WHEN > 79 THEN ''1''\r\n  ELSE ''0''\r\nEND\r\nFROM fsf_user_metric\r\nWHERE id_metric = 1\r\nAND login_user = &login');
-
 -- --------------------------------------------------------
 
 --
@@ -97,18 +77,10 @@ CREATE TABLE IF NOT EXISTS `fsf_step` (
   `summary` varchar(255) NOT NULL,
   `text` text NOT NULL,
   `variation_metrics` varchar(255) NOT NULL,
+  `check_random_code` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_step`),
   KEY `id_instance` (`id_instance`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Contenu de la table `fsf_step`
---
-
-INSERT INTO `fsf_step` (`id_step`, `id_instance`, `summary`, `text`, `variation_metrics`) VALUES
-(1, 1, 'Debut de l''aventure', 'Lundi matin : Le r&eacute;veil sonne, une nouvelle semaine va commencer.', '0;0'),
-(2, 1, 'Route en voiture', 'Route en voiture', ''),
-(3, 1, 'Route en m&eacute;tro', 'Route en m&eacute;tro', '0;0');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -122,16 +94,9 @@ CREATE TABLE IF NOT EXISTS `fsf_step_link` (
   `text_link` varchar(255) NOT NULL,
   `rule_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id_step_origin`,`id_step_target`),
-  KEY `rule_id` (`rule_id`)
+  KEY `rule_id` (`rule_id`),
+  KEY `id_step_target` (`id_step_target`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `fsf_step_link`
---
-
-INSERT INTO `fsf_step_link` (`id_step_origin`, `id_step_target`, `text_link`, `rule_id`) VALUES
-(1, 2, 'Zou en voiture', ''),
-(1, 3, 'Go en m&eacute;tro', '');
 
 -- --------------------------------------------------------
 
@@ -143,16 +108,11 @@ CREATE TABLE IF NOT EXISTS `fsf_user` (
   `login_user` varchar(255) NOT NULL,
   `id_instance` int(11) NOT NULL,
   `id_step` int(11) NOT NULL,
+  `check_activate` tinyint(1) NOT NULL DEFAULT '0',
+  `way_user` text NOT NULL,
   PRIMARY KEY (`login_user`,`id_instance`),
   KEY `id_step` (`id_step`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `fsf_user`
---
-
-INSERT INTO `fsf_user` (`login_user`, `id_instance`, `id_step`) VALUES
-('flo', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -166,10 +126,3 @@ CREATE TABLE IF NOT EXISTS `fsf_user_metric` (
   `value` int(11) NOT NULL,
   PRIMARY KEY (`login_user`,`id_metric`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `fsf_user_metric`
---
-
-INSERT INTO `fsf_user_metric` (`login_user`, `id_metric`, `value`) VALUES
-('flo', 1, 100);
