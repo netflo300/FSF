@@ -30,3 +30,9 @@ function ajouter_link(source) {
 function display_step(id, origin) {
 	ajax('aj_game.php', 'id_step_next='+id+'&id_step_origin='+origin, 'game');
 }
+
+function aj_code(input, i) {
+	if (input.value.length == 6) {
+		ajax('aj_code.php', 'id_code='+i+'&value='+input.value, 'links');
+	}
+ }

@@ -35,7 +35,7 @@ if ($db->get_num_rows() == 0) {
 		}
 	}
 }
-$db->query("SELECT id_step, summary, text, variation_metrics FROM fsf_step s WHERE id_step = '".$_SESSION['currentStep']."' ;");
+$db->query("SELECT id_step, summary, text, variation_metrics, check_random_code FROM fsf_step s WHERE id_step = '".$_SESSION['currentStep']."' ;");
 $step = $db->fetchNextObject();
 
 if ($new_action == true) {
@@ -83,26 +83,37 @@ foreach ($metrics as $k => $v) {
 </table>
 <h3><?php echo $step->summary ;?></h3>
 <p><?php echo $step->text ;?></p>
+<div id="links">
 <?php 
-if(!empty($link)) {
-	foreach($link as $k => $v) {
-		$display_link = true;
-		if (isset($v['rule_id']) && !empty($v['rule_id']) && !empty($v['rule_content'])) {
-			$rule_query = str_replace('&login', $_SESSION['login_user'], $v['rule_content']);
-			$db->query($rule_query);
-			$o = $db->fetchNextObject();
-			if ($o->result == '0') {
-				$display_link = false;
+if($step->check_random_code == '1') {
+	$db->query("SELECT count(*) as count from fsf_code ;");
+	$code = $db->fetchNextObject();
+	$rand_code = rand(0, $code->count);
+	?>
+	<label>Entrez le code n°<?php echo $rand_code; ?></label>
+	<input type="text" name="code" onchange="aj_code(this, <?php echo $rand_code; ?>);" onkeyup="aj_code(this, <?php echo $rand_code; ?>);" />
+	<?php 
+} else {
+	if(!empty($link)) {
+		foreach($link as $k => $v) {
+			$display_link = true;
+			if (isset($v['rule_id']) && !empty($v['rule_id']) && !empty($v['rule_content'])) {
+				$rule_query = str_replace('&login', $_SESSION['login_user'], $v['rule_content']);
+				$db->query($rule_query);
+				$o = $db->fetchNextObject();
+				if ($o->result == '0') {
+					$display_link = false;
+				}
 			}
-		}
-		if ($display_link == true) {
-			echo'<a href="#" onclick="display_step('.$v['id_step_target'].', '.$step->id_step.')">'.$v['text_link'].'</a><br/>';
+			if ($display_link == true) {
+				echo'<a href="#" onclick="display_step('.$v['id_step_target'].', '.$step->id_step.')">'.$v['text_link'].'</a><br/>';
+			}
 		}
 	}
 }
 
 ?>
-
+</div>
 
 <script type="text/javascript">
 <?php 
