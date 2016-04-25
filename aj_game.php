@@ -57,7 +57,7 @@ $metrics = $db->fetch_array();
 
 
 
-$db->query("SELECT id_step_target, text_link FROM fsf_step_link s WHERE id_step_origin = '".$_SESSION['currentStep']."' ;");
+$db->query("SELECT id_step_target, text_link, s.rule_id, r.rule_content  FROM fsf_step_link s left join fsf_rule r ON r.rule_id = s.rule_id WHERE id_step_origin = '".$_SESSION['currentStep']."' ;");
 $link =array();
 if($db->get_num_rows() > 0) {
 	$link = $db->fetch_array();
@@ -86,7 +86,18 @@ foreach ($metrics as $k => $v) {
 <?php 
 if(!empty($link)) {
 	foreach($link as $k => $v) {
-		echo'<a href="#" onclick="display_step('.$v['id_step_target'].', '.$step->id_step.')">'.$v['text_link'].'</a><br/>';
+		$display_link = true;
+		if (isset($v['rule_id']) && !empty($v['rule_id']) && !empty($v['rule_content'])) {
+			$rule_query = str_replace('&login', $_SESSION['login_user'], $v['rule_content']);
+			$db->query($rule_query);
+			$o = $db->fetchNextObject();
+			if ($o->result == '0') {
+				$display_link = false;
+			}
+		}
+		if ($display_link == true) {
+			echo'<a href="#" onclick="display_step('.$v['id_step_target'].', '.$step->id_step.')">'.$v['text_link'].'</a><br/>';
+		}
 	}
 }
 
