@@ -4,3 +4,29 @@ table tr td.mobile {
 	
 	
 }
+
+#game {
+	text-align:center;
+		font-size: 18pt;
+}
+
+#game table {
+	margin:auto;
+}
+
+#game h1 {
+	font-size: 25pt;
+}
+
+#game h3 {
+	font-size: 20pt;
+}
+
+
+#game p {
+	font-size: 18pt;
+}
+
+#game #links {
+	font-size: 18pt;
+}

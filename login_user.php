@@ -28,16 +28,20 @@ if (isset($_POST['login']) && !empty($_POST['login'])) {
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/mobile.css" />
 <title>Insert title here</title>
 </head>
 <body>
+<div id="game">
 <h1>Authentification</h1>
+
 <form action="" method="POST">
 	<label>Joueur : </label>
 	<input type="text" name="login" /><br/>
 	<label>Instance : </label><select name="selectInstance"><?php echo $option ;?></select>
 	<input type="submit" />
 </form>
+</div>
 </body>
 </html>	
 	<?php 
