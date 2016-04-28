@@ -1,0 +1,55 @@
+@CHARSET "ISO-8859-1";
+
+body {
+}
+
+table {
+	width: 600px;
+	margin :auto;
+	border-collapse: collapse;
+}
+
+input[type="button"] {
+		margin :auto;
+}
+
+table caption {
+	width: 600px;
+	font-size : 18pt;
+	font-weight: bold;
+}
+
+
+table tr {
+	width: 300px;
+}
+
+table tr td{
+	text-align: center;
+	border : 1px solid black;
+
+	font-size : 12pt;
+}
+
+table tr th {
+	text-align: center;
+	border : 1px solid black;
+
+	font-size : 16pt;
+}
+
+.fond_blanc {
+	background-color: white;
+}
+
+.fond_orange {
+	background-color: orange;
+}
+
+.fond_vert {
+	background-color: lightgreen;
+}
+
+#game_user, #game_question {
+	text-align:center;
+}
