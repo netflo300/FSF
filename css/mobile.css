@@ -1,3 +1,7 @@
+body {
+	background-image:url("../images/mur.jpg");
+}
+
 
 table tr td.mobile {
 	font-size: 20pt;
@@ -8,6 +12,14 @@ table tr td.mobile {
 #game {
 	text-align:center;
 		font-size: 18pt;
+		width:500px;
+		padding : 10px 20px 20px 20px;
+		margin:auto;
+		background-color: white;
+		border: 5px ridge black;
+		-moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
 }
 
 #game table {

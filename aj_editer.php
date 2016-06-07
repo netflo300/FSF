@@ -37,7 +37,7 @@ if ($db->get_num_rows() > 0) {
 
 
 ?>
-<label>Necessite un code pour avancer</label><input type="checkbox" name="check_random_code" <?php echo (((isset($o->check_random_code) && $o->check_random_code) == '1')?'chacked="checked"':'') ; ?> />
+<label>Necessite un code pour avancer</label><input type="checkbox" name="check_random_code" <?php echo (((isset($o->check_random_code) && $o->check_random_code) == '1')?'checked="checked"':'') ; ?> />
 <input type="hidden" name="id_step" value="<?php echo $_POST['id_step'] ; ?>" />
 <br />
 <input type="submit" name="editer" />

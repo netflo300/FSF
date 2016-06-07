@@ -42,11 +42,11 @@ if ($new_action == true) {
 	if(isset($step->variation_metrics) && !empty($step->variation_metrics)) {
 		$tab_variation = explode(";", $step->variation_metrics);
 	}
-	$db->query("SELECT id_metric, default_value FROM fsf_metric WHERE id_instance = '".$_SESSION['instance']."' ORDER BY id_metric;");
+	$db->query("SELECT id_metric, default_value, min_value, max_value FROM fsf_metric WHERE id_instance = '".$_SESSION['instance']."' ORDER BY id_metric;");
 	if($db->get_num_rows()>0 && isset($tab_variation) && !empty($tab_variation)) {
 		$count = 0;
 		foreach ($db->fetch_array() as $k => $v) {
-			$db->query("UPDATE fsf_user_metric SET value = value + ".$tab_variation[$count++]." WHERE login_user = '".$_SESSION['login_user']."' AND id_metric = '".$v['id_metric']."' ;");
+			$db->query("UPDATE fsf_user_metric SET value = LEAST(GREATEST((value + ".$tab_variation[$count++]." ),".$v['min_value']."), ".$v['max_value'].") WHERE login_user = '".$_SESSION['login_user']."' AND id_metric = '".$v['id_metric']."' ;");
 		}
 	}
 }
