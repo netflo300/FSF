@@ -27,7 +27,6 @@ if (isset($_POST['login']) && !empty($_POST['login'])) {
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/style.css" />
 <link rel="stylesheet" type="text/css" href="css/mobile.css" />
 <title>Insert title here</title>
 </head>

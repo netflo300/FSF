@@ -14,9 +14,7 @@ if(!isset($_SESSION['login_user'])) {
 $db->query("SELECT login_user, id_step FROM fsf_user u WHERE id_instance = '".$_SESSION['instance']."' AND login_user = '".$_SESSION['login_user']."' ;");
 $user = $db->fetchNextObject();
 
-if(!isset($_SESSION['currentStep'])) {
-	$_SESSION['currentStep'] = $user->id_step;
-} 
+$_SESSION['currentStep'] = $user->id_step;
 
 
 entete('Game');
