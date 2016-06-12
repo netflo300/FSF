@@ -35,7 +35,9 @@ function entete($titre) {
 	//$res.='<script type="text/javascript" src="scripts/tablefilter_all_min.js" ></script>'."\n";
 	$res.=''."\n";
 	$res.='<link href="css/base.css" rel="stylesheet" type="text/css" />'."\n";
-	$res.='<link href="css/mobile.css" rel="stylesheet" type="text/css" />'."\n";
+	if (isset ($_SESSION['mode']) && $_SESSION['mode'] == 'utilisateur') {
+		$res.='<link href="css/mobile.css" rel="stylesheet" type="text/css" />'."\n";
+	}
 	$res.='<link href="css/jquery.stepProgressBar.css" rel="stylesheet" type="text/css" />'."\n";
 	//$res.='<link href="styles/filtergrid.css" rel="stylesheet" type="text/css" />'."\n";
 	$res.='</head>'."\n";
